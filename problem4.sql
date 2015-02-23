@@ -1,0 +1,20 @@
+--List the vendors supplying a line item containing 'CICS', 'COBOL' , 'MVS', or 'VSAM'.
+--Include the vendor ID, name, invoice number, line item description and amount.
+--Use formatting to reduce the space required and format the amount as currency.
+--Order the listing by ID.
+      
+SELECT
+      VENDORS.VENDOR_ID, VENDORS.VENDOR_NAME, INVOICES.INVOICE_ID, INVOICE_LINE_ITEMS.LINE_ITEM_DESCRIPTION, TO_CHAR(INVOICE_LINE_ITEMS.LINE_ITEM_AMT, '$999999999.99') as LineItemsAmount
+FROM
+      VENDORS, INVOICES, INVOICE_LINE_ITEMS
+WHERE
+      VENDORS.VENDOR_ID = INVOICES.VENDOR_ID AND
+      INVOICES.INVOICE_ID = INVOICE_LINE_ITEMS.INVOICE_ID AND
+      (INVOICE_LINE_ITEMS.LINE_ITEM_DESCRIPTION LIKE '%CICS%' OR 
+      INVOICE_LINE_ITEMS.LINE_ITEM_DESCRIPTION LIKE '%COBAL%' OR
+      INVOICE_LINE_ITEMS.LINE_ITEM_DESCRIPTION LIKE '%MVS%' OR
+      INVOICE_LINE_ITEMS.LINE_ITEM_DESCRIPTION LIKE '%VSAM%')
+ORDER BY
+      VENDOR_ID, INVOICE_ID;
+      
+      
