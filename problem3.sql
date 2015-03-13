@@ -1,7 +1,7 @@
 --List the total for each line item description, giving the description and the total amount when the total > $5,000.
 --Use formatting and concatenation to reduce the space required for the description and to format the total as currency.
 --Order the output by the total, descending.
---Ask about reducing space of description?????????????
+
 SELECT 
       INVOICE_ID,
       INVOICE_SEQUENCE,
